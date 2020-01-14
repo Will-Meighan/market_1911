@@ -77,7 +77,6 @@ class MarketTest < Minitest::Test
     assert_equal false, @market.sell(@item1, 200)
     assert_equal false, @market.sell(@item5, 1)
     assert_equal true, @market.sell(@item4, 5)
-    assert_equal 45, @vendor2.check_stock(@item4)
     assert_equal true, @market.sell(@item1, 40)
     assert_equal 0, @vendor1.check_stock(@item1)
     assert_equal 60, @vendor3.check_stock(@item1)

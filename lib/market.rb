@@ -42,4 +42,14 @@ class Market
     inventory_hash
   end
 
+  def sell(item, quantity)
+    checking_item = total_inventory.find { |item_type| item_type = item}
+    if checking_item.last < quantity || !total_inventory.include?(item)
+      false
+    else
+
+      true
+    end
+  end
+
 end
