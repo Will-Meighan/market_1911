@@ -19,4 +19,17 @@ class Market
     @vendors.find_all { |vendor| vendor.inventory.include?(item) }
   end
 
+  def sorted_item_list
+    total_inventory = @vendors.map do |vendor|
+      vendor.inventory
+    end
+    names_array = []
+    total_inventory.map do |item|
+      item.map do |i|
+        names_array << i.first.name
+      end
+    end
+    names_array.uniq.sort
+  end
+
 end
