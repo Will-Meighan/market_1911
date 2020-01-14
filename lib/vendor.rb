@@ -8,7 +8,7 @@ class Vendor
   end
 
   def check_stock(item)
-    if @inventory.count == 0
+    if !@inventory.include?(item)
       0
     else
       (@inventory.find { |item_type| item = item_type }).last
