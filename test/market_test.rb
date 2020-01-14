@@ -15,6 +15,7 @@ class MarketTest < Minitest::Test
     @item2 = Item.new({name: 'Tomato', price: '$0.50'})
     @item3 = Item.new({name: "Peach-Raspberry Nice Cream", price: "$5.30"})
     @item4 = Item.new({name: "Banana Nice Cream", price: "$4.25"})
+    @item5 = Item.new({name: 'Onion', price: '$0.25'})
 
     @vendor1.stock(@item1, 35)
     @vendor1.stock(@item2, 7)
@@ -67,6 +68,19 @@ class MarketTest < Minitest::Test
     @market.add_vendor(@vendor3)
     expected = { @item1 => 100, @item2 => 7, @item4 => 50, @item3 => 25 }
     assert_equal expected, @market.total_inventory
+  end
+
+  def test_it_can_sell
+    @market.add_vendor(@vendor1)
+    @market.add_vendor(@vendor2)
+    @market.add_vendor(@vendor3)
+    assert_equal false, @market.sell(@item1, 200)
+    assert_equal false, @market.sell(@item5, 1)
+    assert_equal true, @market.sell(@item4, 5)
+    assert_equal 45, @vendor2.check_stock(@item4)
+    assert_equal true, @market.sell(@item1, 40)
+    assert_equal 0, @vendor1.check_stock(@item1)
+    assert_equal 60, @vendor3.check_stock(@item1)
   end
 
 end
