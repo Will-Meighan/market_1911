@@ -32,4 +32,14 @@ class Market
     names_array.uniq.sort
   end
 
+  def total_inventory
+    inventory_hash = Hash.new(0)
+    @vendors.each do |vendor|
+      vendor.inventory.each do |item|
+        inventory_hash[item.first] += item.last
+      end
+    end
+    inventory_hash
+  end
+
 end
