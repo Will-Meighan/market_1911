@@ -47,7 +47,18 @@ class Market
     if checking_item.last < quantity || !total_inventory.include?(item)
       false
     else
-
+      until quantity == 0
+      vendor_with_item = @vendors.find do |vendor|
+        vendor.inventory.include?(item)
+      end
+        if quantity <= vendor_with_item.inventory[item]
+          vendor_with_item.inventory[item] -= quantity
+          quantity = 0
+        else
+          quantity -= vendor_with_item.inventory[item]
+          vendor_with_item.inventory.delete(item)
+        end
+      end
       true
     end
   end
