@@ -8,7 +8,11 @@ class Vendor
   end
 
   def check_stock(item)
-    @inventory.count { |item_type| item = item_type }
+    if @inventory.count == 0
+      0
+    else
+      (@inventory.find { |item_type| item = item_type }).last
+    end
   end
 
   def stock(item, amount)
